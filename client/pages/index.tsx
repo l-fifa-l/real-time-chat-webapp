@@ -1,4 +1,4 @@
-import MessagesContainer from '../components/messages';
+import MessagesContainer from '../components/Messages';
 import RoomsContainer from '../components/Rooms';
 import { useSockets } from '../context/socket.context';
 import { useRef } from 'react';
@@ -20,8 +20,21 @@ export default function Home() {
 
   return (
     <div>
-      <RoomsContainer />
-      <MessagesContainer />
+      {!username && (
+        <div className={styles.usernameWrapper}>
+          <div className={styles.usernameInner}>
+            <input placeholder="Username" ref={usernameRef} />
+            <button onClick={handleSetUsername}>START</button>
+          </div>
+        </div>
+      )}
+
+      {username && (
+        <div className={styles.container}>
+          <RoomsContainer />
+          <MessagesContainer />
+        </div>
+      )}
     </div>
   );
 }
