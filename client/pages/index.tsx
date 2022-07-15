@@ -1,5 +1,6 @@
 import MessagesContainer from '../components/Messages';
 import RoomsContainer from '../components/Rooms';
+import styles from '../styles/Home.module.css';
 import { useSockets } from '../context/socket.context';
 import { useRef } from 'react';
 

@@ -3,8 +3,8 @@ import { createServer } from 'http';
 import { Server } from 'socket.io';
 import cors from 'cors';
 import config from 'config';
-import logger from './utils/logger';
 import socket from './socket';
+import logger from './utils/logger';
 
 const port = config.get<number>('port');
 const host = config.get<string>('host');
