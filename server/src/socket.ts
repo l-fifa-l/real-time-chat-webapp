@@ -7,6 +7,7 @@ const EVENTS = {
   CLIENT: {
     CREATE_ROOM: 'CREATE_ROOM',
     SEND_ROOM_MESSAGE: 'SEND_ROOM_MESSAGE',
+    JOIN_ROOM: 'EVENTS.CLIENT.JOIN_ROOM',
   },
 
   SERVER: {
@@ -48,7 +49,7 @@ function socket({ io }: { io: Server }) {
       // emit back to the rooms creator saying that they have joined the room
       socket.emit(EVENTS.SERVER.JOINED_ROOM, roomId);
     });
-
+    // when a user sends a message
     socket.on(
       EVENTS.CLIENT.SEND_ROOM_MESSAGE,
       ({ roomId, message, username }) => {
@@ -61,6 +62,11 @@ function socket({ io }: { io: Server }) {
         });
       }
     );
+    // when a user joins a room
+    socket.on(EVENTS.CLIENT.JOIN_ROOM, (roomId) => {
+      socket.join(roomId);
+      socket.emit(EVENTS.SERVER.JOINED_ROOM, roomId);
+    });
   });
 }
 
